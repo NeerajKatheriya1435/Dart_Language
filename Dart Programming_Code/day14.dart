@@ -1,4 +1,3 @@
-import 'day12a.dart';
 
 class Student {
   String? name;
