@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="company.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1282"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="employees" custom_title="0" dock_id="1" table="4,9:mainemployees"/><dock_state state="000000ff00000000fd00000001000000020000043c000002bcfc0100000001fb000000160064006f0063006b00420072006f007700730065003101000000000000043c0000011800ffffff000002580000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1*">CREATE TABLE employees (
+emp_id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT NOT NULL,
+email TEXT UNIQUE,
+age INTEGER CHECK(age &gt;= 18),
+salary REAL DEFAULT 20000,
+city TEXT DEFAULT 'Lucknow'
+);
+
+INSERT into employees(name,email,age,city)
+values (&quot;Mohan&quot;,&quot;mohan123@mahan.com&quot;,67,null)
+-- (&quot;Test&quot;,&quot;test@test.com&quot;,44,&quot;Noida&quot;),
+-- (&quot;Muskan&quot;,&quot;muskan@muskan.com&quot;,18,&quot;Noida&quot;),
+-- (&quot;Kuldeep&quot;,&quot;kuldeep@kuldeep.com&quot;,48,&quot;Lucknow&quot;),
+-- (&quot;Nawzish&quot;,&quot;nawazish@nawazish.com&quot;,26,&quot;Lucknow&quot;),
+-- (&quot;Rohit&quot;,&quot;rohit@rohit.com&quot;,34,&quot;Noida&quot;),
+-- (&quot;Abhay&quot;,&quot;abhay@abhay.com&quot;,38,&quot;Goa&quot;);
+
+-- select * from employees
+-- WHERE city = &quot;Delhi&quot; or age&gt;46
+
+-- select * from employees
+-- WHERE not city = &quot;Noida&quot;
+
+-- select * from employees
+-- WHERE city in (&quot;Noida&quot;,&quot;Delhi&quot;,&quot;Goa&quot;);
+
+-- select * from employees
+-- WHERE name like &quot;T___a%&quot;
+
+-- select * from employees
+-- WHERE age not BETWEEN 40 and 60
+
+-- select * from employees
+-- WHERE city IS not NULL;
+
+-- select * from employees
+-- where city=&quot;Noida&quot;
+-- LIMIT 2
+
+-- select * from employees
+-- ORDER by age asc
+-- LIMIT 3
+-- OFFSET 3
+
+-- select count(emp_id) as TotalCount from employees;
+-- select max(salary),name,city as TotalSalary from employees;
+-- select avg(salary) as AVGSalary from employees;
+
+-- select city, count(emp_id) as NumberOfSTD from employees
+-- GROUP by city
+-- HAVING count(city)&gt;=2;</sql><current_tab id="0"/></tab_sql></sqlb_project>

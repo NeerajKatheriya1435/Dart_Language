@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="day1.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1182"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="employees" custom_title="0" dock_id="2" table="4,9:mainemployees"/><dock_state state="000000ff00000000fd00000001000000020000000000000000fc0100000002fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000000000000000fb000000160064006f0063006b00420072006f00770073006500320100000000ffffffff0000011800ffffff000000000000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1*">CREATE TABLE employees (
+emp_id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT,
+department TEXT,
+salary REAL,
+age INTEGER,
+city TEXT
+);
+
+-- INSERT INTO employees (name, department, salary, age, city)
+-- VALUES ('Neeraj', 'IT', 45000, 23, 'Lucknow');
+
+-- INSERT INTO employees (name, department, salary, age, city) VALUES
+-- ('Amit', 'HR', 30000, 25, 'Delhi'),
+-- ('Riya', 'Finance', 40000, 24, 'Mumbai'),
+-- ('Sohan', 'IT', 50000, 26, 'Pune'),
+-- ('Priya', 'Marketing', 35000, 22, 'Noida'),
+-- ('Rahul', 'IT', 60000, 27, 'Bangalore');
+
+-- SELECT * FROM employees;
+-- SELECT name as Name, salary as Salary FROM employees;
+
+-- SELECT * FROM employees
+-- WHERE department = 'IT';
+
+-- UPDATE employees
+-- SET salary = 55000
+-- WHERE emp_id = 3;
+
+-- UPDATE employees
+-- SET salary = salary*1.5
+-- WHERE department = 'IT';
+
+-- DELETE FROM employees
+-- WHERE department = &quot;IT&quot;;
+
+CREATE TABLE employees2 (
+emp_id INTEGER PRIMARY KEY,
+name TEXT NOT NULL,
+email TEXT UNIQUE,
+age INTEGER CHECK(age &gt;= 18),
+salary REAL DEFAULT 20000,
+city TEXT DEFAULT 'Lucknow'
+);
+
+-- INSERT INTO employees2 (emp_id, name, email, age)
+-- VALUES (101,'Neeraj', 'neeraj@gmail.com', 23);
+
+SELECT * FROM employees2;
+
+INSERT INTO employees2 (emp_id,name, email, age,salary,city)
+VALUES (105,'Hero1', 'hero1@gmail.com', 26,50001,'Hardoi');
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
