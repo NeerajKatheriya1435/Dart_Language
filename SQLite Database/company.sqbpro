@@ -1,58 +1,93 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="company.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1282"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="employees" custom_title="0" dock_id="1" table="4,9:mainemployees"/><dock_state state="000000ff00000000fd00000001000000020000000000000000fc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000011300ffffff000000000000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1*">CREATE TABLE departments (
-dept_id INTEGER PRIMARY KEY AUTOINCREMENT,
-dept_name TEXT NOT NULL
-);
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="company.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1282"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="departments" custom_title="0" dock_id="1" table="4,11:maindepartments"/><dock_state state="000000ff00000000fd00000001000000020000000000000000fc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000011300ffffff000000000000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1*">
+select * from emp
+select name,salary from emp
+where salary &gt; (SELECT avg(salary) from emp)
 
-INSERT into departments(dept_name)
-VALUES (&quot;HR&quot;),(&quot;Marketing&quot;),(&quot;Manager&quot;),(&quot;Sales&quot;)
+SELECT avg(salary) as AverageSalary from emp;
 
-SELECT * from departments;
+select 1 from departments
 
-CREATE TABLE emp (
-emp_id INTEGER PRIMARY KEY AUTOINCREMENT,
-name TEXT,
-salary REAL,
-dept_id INTEGER,
-FOREIGN KEY (dept_id) REFERENCES departments(dept_id)
-);
+-- select name,salary from emp
+-- where dept_id = (SELECT dept_id from departments where dept_name=&quot;HR&quot;)
 
-insert into emp(name,salary,dept_id)
-VALUES (&quot;Seema&quot;,29000,null),
--- (&quot;Shivam&quot;,25000,3),
--- (&quot;Shyam&quot;,76000,1),
--- (&quot;Rahul&quot;,78000,2),
--- (&quot;Tayyab&quot;,28000,3);
 
-select * from emp;
+-- SELECT dept_id, AVG(salary) AS avg_salary
+-- FROM emp
+-- GROUP BY dept_id
 
--- SELECT e.name, d.dept_name
+
+-- SELECT name,salary
 -- FROM emp e
--- INNER JOIN departments d
--- ON e.dept_id = d.dept_id;
-
--- SELECT e.name, d.dept_name
--- FROM emp e
--- LEFT JOIN departments d
--- ON e.dept_id = d.dept_id;
-
--- SELECT e.name, d.dept_name
--- FROM emp e
--- RIGHT JOIN departments d
--- ON e.dept_id = d.dept_id;
-
-
--- SELECT e.name, d.dept_name
--- FROM emp e
--- LEFT JOIN departments d
--- ON e.dept_id = d.dept_id
--- UNION
--- SELECT e.name, d.dept_name
+-- WHERE not EXISTS (
+-- SELECT 1
 -- FROM departments d
--- LEFT JOIN emp e
--- ON e.dept_id = d.dept_id;
+-- WHERE d.dept_id = e.dept_id
+-- );
 
+-- SELECT name, salary,
+-- ROW_NUMBER() OVER (ORDER BY salary DESC) AS rank_no
+-- FROM emp;
 
-SELECT e.name, d.dept_name
-FROM emp e
-CROSS JOIN departments d;
+-- SELECT name, salary,
+-- ROW_NUMBER() OVER (PARTITION BY name ORDER BY salary DESC) AS
+-- dept_rank
+-- FROM emp;
+
+CREATE TABLE accounts(
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    balance REAL
+);
+
+INSERT INTO accounts VALUES(1,'Rahul',10000);
+INSERT INTO accounts VALUES(2,'Aman',5000);
+INSERT INTO accounts VALUES(3,'Rohan',2000);
+INSERT INTO accounts VALUES(4,'Tayya',4000);
+
+SELECT * from accounts;
+
+-- UPDATE accounts
+-- SET balance = balance - 1000
+-- WHERE id = 1;
+-- 
+-- BEGIN TRANSACTION;
+-- 
+-- UPDATE accounts
+-- SET balance = balance - 100
+-- WHERE id = 1;
+-- 
+-- UPDATE accounts
+-- SET balance = balance + 100
+-- WHERE id = 2;
+-- 
+-- COMMIT;
+-- 
+-- BEGIN TRANSACTION;
+-- 
+-- UPDATE accounts
+-- SET balance = balance - 100
+-- WHERE id = 1;
+-- 
+-- -- Suppose error happens here
+-- UPDATE accounts
+-- SET balance = balance + 100
+-- WHERE id = 2;
+-- 
+-- ROLLBACK;
+-- COMMIT;
+
+SELECT * from accounts;
+
+BEGIN TRANSACTION;
+
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+
+SAVEPOINT sp1;
+
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+-- If error happens
+ROLLBACK TO sp1;
+
+COMMIT;
+
 </sql><current_tab id="0"/></tab_sql></sqlb_project>
